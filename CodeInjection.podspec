@@ -14,7 +14,8 @@ Pod::Spec.new do |s|
   s.swift_version = '4.0'
 
   s.library = 'z'
-  s.source_files  = 'InjectionBundle/InjectionClient.{h,mm}',
+  s.source_files  = 'InjectionBundle/CoreInjectionClient.{h,mm}',
+                    'InjectionBundle/InjectionClient.{h,mm}',
                     'InjectionBundle/NSObjectSwiftInjection.swift',
                     'InjectionBundle/UIViewControllerSwiftInjection.swift',
                     'InjectionBundle/SwiftEval.swift',
@@ -27,12 +28,6 @@ Pod::Spec.new do |s|
                     'XprobePlugin/Classes/Xtrace.h',
                     'XprobePlugin/XprobeSwift/SwiftSwizzler.swift',
                     'XprobePlugin/XprobeSwift/XprobeSwift.swift'
-
-  s.default_subspec = 'Core'
-
-  s.subspec 'Core' do |ss|
-    ss.source_files = 'InjectionBundle/CoreInjectionClient.{h,mm}'
-  end
 
   s.subspec 'Test' do |ss|
     ss.source_files =   'InjectionBundle/InjectionClient.{h,mm}',

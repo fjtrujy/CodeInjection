@@ -20,8 +20,8 @@
 
 #if __has_include("iOSInjection-Swift.h")
 #import "iOSInjection-Swift.h"
-#elif __has_include("InjectionIII/InjectionIII-Swift.h")
-#import "InjectionIII/InjectionIII-Swift.h"
+#elif __has_include("CodeInjection/CodeInjection-Swift.h")
+#import "CodeInjection/CodeInjection-Swift.h"
 #endif
 
 #endif
@@ -71,8 +71,8 @@ static struct {
 
 #if __has_include("macOSInjection-Swift.h")
 #import "macOSInjection-Swift.h"
-#elif __has_include("InjectionIII/InjectionIII-Swift.h")
-#import "InjectionIII/InjectionIII-Swift.h"
+#elif __has_include("CodeInjection/CodeInjection-Swift.h")
+#import "CodeInjection/CodeInjection-Swift.h"
 #endif
 
 #endif

@@ -112,7 +112,7 @@ extension NSObject {
             unsafeBitCast(self, to: SwiftEvalImpl.self).evalImpl?(_ptr: ptr)
         }
         let out = ptr.pointee
-        ptr.deallocate(capacity: 1)
+        ptr.deallocate()
         return out
     }
 }
@@ -408,7 +408,7 @@ public class SwiftEval: NSObject {
             }
             symbols.removeLast()
 
-            return Set(symbols.flatMap { dlsym(dl, String($0.dropFirst())) }).map { unsafeBitCast($0, to: AnyClass.self) }
+            return Set(symbols.compactMap { dlsym(dl, String($0.dropFirst())) }).map { unsafeBitCast($0, to: AnyClass.self) }
         }
     }
 
