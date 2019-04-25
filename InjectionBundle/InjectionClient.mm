@@ -7,7 +7,7 @@
 //
 
 #import "InjectionClient.h"
-#import "InjectionServer.h"
+#import "InjectionEnum.h"
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #if __has_include("tvOSInjection10-Swift.h")
@@ -17,9 +17,17 @@
 #elif __has_include("iOSInjection10-Swift.h")
 #import "iOSInjection10-Swift.h"
 #else
+
+#if __has_include("iOSInjection-Swift.h")
 #import "iOSInjection-Swift.h"
+#elif __has_include("InjectionIII/InjectionIII-Swift.h")
+#import "InjectionIII/InjectionIII-Swift.h"
 #endif
+
+#endif
+
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 
 @implementation NSObject (Remapper)
 
@@ -60,7 +68,13 @@ static struct {
 #if __has_include("macOSInjection10-Swift.h")
 #import "macOSInjection10-Swift.h"
 #else
+
+#if __has_include("macOSInjection-Swift.h")
 #import "macOSInjection-Swift.h"
+#elif __has_include("InjectionIII/InjectionIII-Swift.h")
+#import "InjectionIII/InjectionIII-Swift.h"
+#endif
+
 #endif
 #endif
 
@@ -99,13 +113,12 @@ static struct {
 
 @implementation InjectionClient
 
-+ (void)load {
-    // connect to InjetionIII.app using sicket
++ (void)createInjectionClient {
+    // connect to InjetionIII.app using socket
     if (InjectionClient *client = [self connectTo:INJECTION_ADDRESS])
         [client run];
     else
         printf("💉 Injection loaded but could not connect. Is InjectionIII.app running?\n");
-
 }
 
 - (void)runInBackground {
@@ -168,7 +181,7 @@ static struct {
                 NSError *err = nil;
                 switch (command) {
                 case InjectionLoad:
-                    [SwiftInjection injectWithTmpfile:changed error:&err];
+                    [self.swiftInjection injectWithTmpfile:changed error:&err];
                     break;
                 case InjectionInject: {
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
@@ -178,7 +191,7 @@ static struct {
                     }
                     else
 #endif
-                        [SwiftInjection injectWithOldClass:nil classNameOrFile:changed];
+                        [self.swiftInjection injectWithOldClass:nil classNameOrFile:changed];
                     break;
                 }
 #ifdef XPROBE_PORT
@@ -280,14 +293,14 @@ static struct {
 
         if ([SwiftEval sharedInstance].vaccineEnabled == YES) {
             resetRemapper();
-            [SwiftInjection vaccine:visibleVC];
+            [self.swiftInjection vaccine:visibleVC];
         } else {
             [visibleVC viewDidLoad];
             [visibleVC viewWillAppear:NO];
             [visibleVC viewDidAppear:NO];
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-            [SwiftInjection flash:visibleVC];
+            [visibleVC flashToUpdate];
 #endif
         }
     }
