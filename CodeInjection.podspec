@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
-  s.name = 'InjectionIII'
-  s.version = '1.5.2'
-  s.summary = "InjectionIII allows you make change in runtime over your app"
-  s.description = "Code injection allows you to update the implementation of methods of a class incrementally in the iOS simulator without having to rebuild or restart your application saving developer time."
+  s.name = 'CodeInjection'
+  s.version = '1.5.3'
+  s.summary = "CodeInjection save you a lot of compiling time"
+  s.description = "Code injection allows you to update the implementation of methods of a class incrementally in the iOS simulator without having to rebuild or restart your application saving developer time. It requires to run the additional InjectionIII Mac app"
   s.homepage = 'http://injectionforxcode.com/'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
-  s.author = 'John Holdsworth'
-  s.source = { :git => 'https://github.com/johnno1962/InjectionIII.git', :tag => s.version }
+  s.author = 'Francisco Javier Trujillo Mata'
+  s.source = { :git => 'https://github.com/fjtrujy/CodeInjection.git', :tag => s.version }
 
   s.ios.deployment_target = '10.0'
   s.osx.deployment_target = '10.12'
