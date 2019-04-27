@@ -23,6 +23,9 @@ private let debugSweep = getenv("DEBUG_SWEEP") != nil
 @objc
 public class SwiftInjection: NSObject {
     
+    @objc
+    static let InjectedNotification = Notification.Name("INJECTION_BUNDLE_NOTIFICATION")
+    
     // Functions just implemented if they are going to use XCTest framework
     func appendTestClass(_ newClass: AnyClass) {}
     func proceedTestClasses() {}
@@ -124,8 +127,7 @@ public class SwiftInjection: NSObject {
             }).sweepValue(seeds)
         }
         
-        let notification = Notification.Name("INJECTION_BUNDLE_NOTIFICATION")
-        NotificationCenter.default.post(name: notification, object: oldClasses)
+        NotificationCenter.default.post(name: SwiftInjection.InjectedNotification, object: oldClasses)
     }
 
     @objc(vaccine:)
