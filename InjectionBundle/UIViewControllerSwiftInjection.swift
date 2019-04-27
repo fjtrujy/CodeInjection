@@ -13,7 +13,7 @@ import UIKit
 public extension UIViewController {
     
     /// inject a UIView controller and redraw
-    public func injectVC() {
+    func injectVC() {
         inject()
         for subview in self.view.subviews {
             subview.removeFromSuperview()
@@ -27,7 +27,7 @@ public extension UIViewController {
     }
     
     @objc(flashToUpdate)
-    public func flashToUpdate() {
+    func flashToUpdate() {
         DispatchQueue.main.async {
             let v = UIView(frame: self.view.frame)
             v.backgroundColor = .white
