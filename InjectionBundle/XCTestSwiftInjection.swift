@@ -9,10 +9,15 @@
 import Foundation
 import XCTest
 
+private struct Constants {
+    static let testQueueName = "INTestQueue"
+    static let injectedKey = "Injected"
+}
+
 @objc
 public class XCTestSwiftInjection: SwiftInjection {
 
-    static let testQueue = DispatchQueue(label: "INTestQueue")
+    static let testQueue = DispatchQueue(label: Constants.testQueueName)
     var testClasses = [AnyClass]()
     
     override func appendTestClass(_ newClass: AnyClass) {
@@ -26,19 +31,22 @@ public class XCTestSwiftInjection: SwiftInjection {
         if !testClasses.isEmpty {
             XCTestSwiftInjection.testQueue.async {
                 XCTestSwiftInjection.testQueue.suspend()
-                let timer = Timer(timeInterval: 0, repeats:false, block: { _ in
-                    for newClass in self.testClasses {
-                        let suite0 = XCTestSuite(name: "Injected")
-                        let suite = XCTestSuite(forTestCaseClass: newClass)
-                        let tr = XCTestSuiteRun(test: suite)
-                        suite0.addTest(suite)
-                        suite0.perform(tr)
-                    }
-                    XCTestSwiftInjection.testQueue.resume()
-                })
+                let timer = Timer(timeInterval: 0, target: self, selector: #selector(self.checkClasses(_:)), userInfo: nil, repeats: false)
                 RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
             }
         }
+    }
+    
+    
+    @objc func checkClasses(_ timer: Timer) {
+        for newClass in self.testClasses {
+            let suite0 = XCTestSuite(name: Constants.injectedKey)
+            let suite = XCTestSuite(forTestCaseClass: newClass)
+            let tr = XCTestSuiteRun(test: suite)
+            suite0.addTest(suite)
+            suite0.perform(tr)
+        }
+        XCTestSwiftInjection.testQueue.resume()
     }
         
 }

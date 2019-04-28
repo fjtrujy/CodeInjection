@@ -10,6 +10,13 @@ import Foundation
 #if os(iOS) || os(tvOS)
 import UIKit
 
+private struct Constants {
+    static let initialAlpha: CGFloat = 0.3
+    static let finalAlpha: CGFloat = 0.0
+    static let animationDuration = 0.2
+    static let animationDelay = 0.0
+}
+
 public extension UIViewController {
     
     /// inject a UIView controller and redraw
@@ -26,18 +33,18 @@ public extension UIViewController {
         viewDidLoad()
     }
     
-    @objc(flashToUpdate)
+    @objc
     func flashToUpdate() {
         DispatchQueue.main.async {
             let v = UIView(frame: self.view.frame)
             v.backgroundColor = .white
-            v.alpha = 0.3
+            v.alpha = Constants.initialAlpha
             self.view.addSubview(v)
-            UIView.animate(withDuration: 0.2,
-                           delay: 0.0,
+            UIView.animate(withDuration: Constants.animationDuration,
+                           delay: Constants.animationDelay,
                            options: UIViewAnimationOptions.curveEaseIn,
                            animations: {
-                            v.alpha = 0.0
+                            v.alpha = Constants.finalAlpha
             }, completion: { _ in v.removeFromSuperview() })
         }
     }
