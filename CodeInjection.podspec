@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'CodeInjection'
-  s.version = '1.5.4'
+  s.version = '1.5.5'
   s.summary = "CodeInjection save you a lot of compiling time"
   s.description = "Code injection allows you to update the implementation of methods of a class incrementally in the iOS simulator without having to rebuild or restart your application saving developer time. It requires to run the additional InjectionIII Mac app"
   s.homepage = 'http://injectionforxcode.com/'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.12'
   s.tvos.deployment_target = '9.0'
-  s.swift_version = '4.0'
+  s.swift_version = '5.0'
 
   s.library = 'z'
   s.subspec 'Core' do |ss|

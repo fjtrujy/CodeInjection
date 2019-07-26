@@ -506,6 +506,7 @@
 					};
 					BBCA02441FB1065D00E45F0F = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -928,6 +929,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "InjectionBundle/XprobeSwift-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -949,6 +951,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "InjectionBundle/XprobeSwift-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

@@ -32,7 +32,7 @@ public class XCTestSwiftInjection: SwiftInjection {
             XCTestSwiftInjection.testQueue.async {
                 XCTestSwiftInjection.testQueue.suspend()
                 let timer = Timer(timeInterval: 0, target: self, selector: #selector(self.checkClasses(_:)), userInfo: nil, repeats: false)
-                RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+                RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
             }
         }
     }
